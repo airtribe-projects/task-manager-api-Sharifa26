@@ -1,4 +1,3 @@
-
 function validateTaskInput({ title, description, completed, priority }) {
     const errors = [];
     const allowedPriorities = ['low', 'medium', 'high'];

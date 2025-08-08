@@ -1,15 +1,14 @@
 export const errorMiddleware = (err, req, res, next) => {
-    err.statusCode = err.statusCode || 500;
-    err.status = err.status || "error";
-    if (err.statusCode >= 400 && err.statusCode <= 499) {
-        return res.error(err.message, err.statusCode, {
+    const statusCode = err.statusCode || 500;
+    const status = err.status || "error";
+    if (statusCode >= 400 && statusCode < 500) {
+        return res.error(err.message, statusCode, {
             error: err,
             // stack: err.stack,
         });
     }
 
-    if (err.statusCode === 500) {
-        console.log(err);
+    if (statusCode === 500) {
         // Programming or unknown errors
         return res.error("Something went wrong", 500);
     }

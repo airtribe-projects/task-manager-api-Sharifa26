@@ -14,8 +14,9 @@ taskService.getAllTasks = ({ completed, limit, offset }) => {
 
     const limitNum = limit !== undefined ? parseInt(limit) : tasks.length;
     const offsetNum = offset !== undefined ? parseInt(offset) : 0;
+    const result = tasks.slice(offsetNum, offsetNum + limitNum);
 
-    return tasks.slice(offsetNum, offsetNum + limitNum);
+    return result;
 }
 
 // Get task by id
@@ -61,7 +62,6 @@ taskService.updateTask = (id, data) => {
     if (!isValid) {
         return { errors };
     }
-    const tasks = readTasksFromFile();
     const taskIndex = tasks.findIndex(t => t.id === id);
     if (taskIndex === -1) {
         return null;
